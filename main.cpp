@@ -1,6 +1,7 @@
 #include <windows.h>
 
 #include <iostream>
+#include <bitset>
 
 using namespace std;
 
@@ -26,10 +27,7 @@ int main() {
     }
 
     DWORD_PTR dwProcessAffinityMask = 1;
-
-    for (int i = 0; i < cpuNum - 1; i++) {
-        dwProcessAffinityMask <<= 1;
-    }
+    dwProcessAffinityMask <<= cpuNum - 1;
 
     BOOL ret = SetProcessAffinityMask(hProcess, dwProcessAffinityMask);
     if (!ret) {
